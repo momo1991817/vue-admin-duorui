@@ -106,7 +106,7 @@ export default {
       })
     },
     handleLogin() {
-      this.$router.push('/UserManage')
+      this.$router.push('/')
       // this.$http.get('/columns').then(res => {
       //   this.$router.push('/UserManage')
       // })

@@ -3,27 +3,47 @@
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
     <breadcrumb class="breadcrumb-container" />
-
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img src="../../../static/header.png?imageView2/1/w/80/h/80" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/">
-            <el-dropdown-item>
-              Home
-            </el-dropdown-item>
-          </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
+          <el-dropdown-item>
+            个人信息
+          </el-dropdown-item>
+          <el-dropdown-item>
+            修改密码
+          </el-dropdown-item>
+          <el-dropdown-item>
+            切换账户
+          </el-dropdown-item>
           <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">Log Out</span>
+            <span style="display:block;" @click="logout">退出</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+
+    <div class="right-menu add-btn">
+      <el-dropdown class="avatar-container" trigger="click">
+        <div class="avatar-wrapper" style="margin-top: 0">
+          <span><svg-icon icon-class="form" /> 新增</span>
+          <i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <el-dropdown-item>
+            文章
+          </el-dropdown-item>
+          <el-dropdown-item>
+            视频
+          </el-dropdown-item>
+          <el-dropdown-item>
+            商品
+          </el-dropdown-item>
+          <el-dropdown-item>
+            管理员
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -52,7 +72,7 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      await this.$store.dispatch('user/logout')
+      // await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
@@ -83,7 +103,6 @@ export default {
   .breadcrumb-container {
     float: left;
   }
-
   .right-menu {
     float: right;
     height: 100%;
@@ -134,6 +153,11 @@ export default {
         }
       }
     }
+  }
+
+  .add-btn {
+    float: left;
+    margin-left: 60px;
   }
 }
 </style>
