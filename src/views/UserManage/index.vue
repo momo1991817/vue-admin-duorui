@@ -1,18 +1,19 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+    <div class="dashboard-text" @click="goback">授权用户管理</div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Dashboard',
+  name: 'UserManage',
   computed: {
-    ...mapGetters([
-      'name'
-    ])
+  },
+  methods: {
+    goback() {
+      this.$router.push('/login')
+    }
   }
 }
 </script>
