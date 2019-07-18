@@ -1,5 +1,5 @@
 <template>
-    <div>图片广告</div>
+    <div class="app-container">图片广告</div>
 </template>
 
 <script>

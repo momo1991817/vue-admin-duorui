@@ -1,5 +1,5 @@
 <template>
-    <div>广告位置</div>
+    <div class="app-container">广告位置</div>
 </template>
 
 <script>

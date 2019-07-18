@@ -1,5 +1,5 @@
 <template>
-    <div>栏目数据统计</div>
+    <div class="app-container">栏目数据统计</div>
 </template>
 
 <script>

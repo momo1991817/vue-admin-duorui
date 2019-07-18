@@ -1,5 +1,5 @@
 <template>
-  <div>商品类别</div>
+  <div class="app-container">商品类别</div>
 </template>
 
 <script>

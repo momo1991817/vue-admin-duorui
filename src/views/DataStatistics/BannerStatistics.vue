@@ -1,5 +1,5 @@
 <template>
-    <div>轮播图数据统计</div>
+    <div class="app-container">轮播图数据统计</div>
 </template>
 
 <script>

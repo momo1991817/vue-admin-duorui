@@ -1,5 +1,5 @@
 <template>
-    <div>搜索数据统计</div>
+    <div class="app-container">搜索数据统计</div>
 </template>
 
 <script>

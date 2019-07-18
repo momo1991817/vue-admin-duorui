@@ -1,5 +1,5 @@
 <template>
-    <div>视频分类</div>
+    <div class="app-container">视频分类</div>
 </template>
 
 <script>

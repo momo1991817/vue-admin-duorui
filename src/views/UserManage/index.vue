@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-container">
+  <div  class="app-container">
     <div class="dashboard-text" @click="goback">授权用户管理</div>
   </div>
 </template>

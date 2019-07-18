@@ -1,5 +1,5 @@
 <template>
-    <div>轮播图分类</div>
+    <div class="app-container">轮播图分类</div>
 </template>
 
 <script>

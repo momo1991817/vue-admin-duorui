@@ -1,5 +1,5 @@
 <template>
-    <div>文章列表</div>
+    <div class="app-container">文章列表</div>
 </template>
 
 <script>

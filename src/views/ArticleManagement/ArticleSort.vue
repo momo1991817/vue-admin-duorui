@@ -1,5 +1,5 @@
 <template>
-    <div>文章分类</div>
+    <div class="app-container">文章分类</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <div>视频数据统计</div>
+    <div class="app-container">视频数据统计</div>
 </template>
 
 <script>

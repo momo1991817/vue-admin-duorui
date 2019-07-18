@@ -1,5 +1,5 @@
 <template>
-    <div>栏目列表</div>
+    <div class="app-container">栏目列表</div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <div>作者列表</div>
+    <div class="app-container">作者列表</div>
 </template>
 
 <script>
