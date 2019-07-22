@@ -21,6 +21,11 @@ Vue.prototype.$http = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.baseURL = baseURL
 
+import '../static/ue/ueditor.config.js'
+import '../static/ue/ueditor.all.min.js'
+import '../static/ue/lang/zh-cn/zh-cn.js'
+import '../static/ue/themes/default/css/ueditor.min.css'
+// import '../static/ue/ueditor.parse.min.js'
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

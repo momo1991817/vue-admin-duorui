@@ -19,8 +19,7 @@
      * 因此，UEditor提供了针对不同页面的编辑器可单独配置的根路径，具体来说，在需要实例化编辑器的页面最顶部写上如下代码即可。当然，需要令此处的URL等于对应的配置。
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
-    // window.UEDITOR_HOME_URL = "/src/assets/ueditor/"
-    var _url = 'http://hnwlcm.com:8099/'
+    window.UEDITOR_HOME_URL = "/static/ue/";
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
 
     /**
@@ -32,9 +31,101 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: _url + "article/config"
+        , serverUrl: URL + "php/controller.php",
+/* 上传图片配置项 */
+"imageActionName": "uploadimage", /* ִ���ϴ�ͼƬ��action���� */
+"imageFieldName": "file", /* �ύ��ͼƬ������ */
+"imageMaxSize": 10240000, /* �ϴ���С���ƣ���λB */
+"imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* �ϴ�ͼƬ��ʽ��ʾ */
+"imageCompressEnable": true, /* �Ƿ�ѹ��ͼƬ,Ĭ����true */
+"imageCompressBorder": 1600, /* ͼƬѹ��������� */
+"imageInsertAlign": "none", /* �����ͼƬ������ʽ */
+"imageUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
+"imagePathFormat": "../../leguan_ad/lg_file/files/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+                           
+
+/* 涂鸦图片上传配置项 */
+"scrawlActionName": "uploadscrawl", /* ִ���ϴ�Ϳѻ��action���� */
+"scrawlFieldName": "upfile", /* �ύ��ͼƬ������ */
+"scrawlPathFormat": "/ueditor/jsp/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+"scrawlMaxSize": 2048000, /* �ϴ���С���ƣ���λB */
+"scrawlUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
+"scrawlInsertAlign": "none",
+
+/* 截图工具上传 */
+"snapscreenActionName": "uploadimage", /* ִ���ϴ���ͼ��action���� */
+"snapscreenPathFormat": "/ueditor/jsp/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+"snapscreenUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
+"snapscreenInsertAlign": "none", /* �����ͼƬ������ʽ */
+
+/* 抓取远程图片配置 */
+"catcherLocalDomain": ["127.0.0.1", "localhost", "img.baidu.com"],
+"catcherActionName": "catchimage", /* ִ��ץȡԶ��ͼƬ��action���� */
+"catcherFieldName": "source", /* �ύ��ͼƬ�б������ */
+"catcherPathFormat": "../lg_file/files/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+"catcherUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
+"catcherMaxSize": 2048000, /* �ϴ���С���ƣ���λB */
+"catcherAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* ץȡͼƬ��ʽ��ʾ */
+
+/* 上传视频配置 */
+"videoActionName": "uploadvideo", /* ִ���ϴ���Ƶ��action���� */
+"videoFieldName": "upfile", /* �ύ����Ƶ������ */
+"videoPathFormat": "/ueditor/jsp/upload/video/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+"videoUrlPrefix": "", /* ��Ƶ����·��ǰ׺ */
+"videoMaxSize": 102400000, /* �ϴ���С���ƣ���λB��Ĭ��100MB */
+"videoAllowFiles": [
+    ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+    ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid"], /* �ϴ���Ƶ��ʽ��ʾ */
+
+    /* 上传文件配置 */
+"fileActionName": "uploadfile", /* controller��,ִ��
+"fileFieldName": "upfile", /* �ύ���ļ������� */
+"filePathFormat": "/ueditor/jsp/upload/file/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
+"fileUrlPrefix": "", /* �ļ�����·��ǰ׺ */
+"fileMaxSize": 51200000, /* �ϴ���С���ƣ���λB��Ĭ��50MB */
+"fileAllowFiles": [
+    ".png", ".jpg", ".jpeg", ".gif", ".bmp",
+    ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+    ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid",
+    ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
+    ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"
+], /* �ϴ��ļ���ʽ��ʾ */
+
+/* �г�ָ��Ŀ¼�µ�ͼƬ */
+"imageManagerActionName": "listimage", /* ִ��ͼƬ�����action���� */
+"imageManagerListPath": "/ueditor/jsp/upload/image/", /* ָ��Ҫ�г�ͼƬ��Ŀ¼ */
+"imageManagerListSize": 20, /* ÿ���г��ļ����� */
+"imageManagerUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
+"imageManagerInsertAlign": "none", /* �����ͼƬ������ʽ */
+"imageManagerAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* �г����ļ����� */
+
+/* �г�ָ��Ŀ¼�µ��ļ� */
+"fileManagerActionName": "listfile", /* ִ���ļ������action���� */
+"fileManagerListPath": "/ueditor/jsp/upload/file/", /* ָ��Ҫ�г��ļ���Ŀ¼ */
+"fileManagerUrlPrefix": "", /* �ļ�����·��ǰ׺ */
+"fileManagerListSize": 20, /* ÿ���г��ļ����� */
+"fileManagerAllowFiles": [
+    ".png", ".jpg", ".jpeg", ".gif", ".bmp",
+    ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
+    ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid",
+    ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
+    ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"
+] 
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
+        // , toolbars: [[
+        //     'fullscreen', 'source', '|', 'undo', 'redo', '|',
+        //     'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+        //     'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+        //     'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+        //     'directionalityltr', 'directionalityrtl', 'indent', '|',
+        //     'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+        //     'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+        //     'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+        //     'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+        //     'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
+        //     'print', 'preview', 'searchreplace', 'drafts', 'help'
+        // ]]
         , toolbars: [[
             'fullscreen', 'source', '|', 'undo', 'redo', '|',
             'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
@@ -43,11 +134,12 @@
             'directionalityltr', 'directionalityrtl', 'indent', '|',
             'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
             'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
             'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
-            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-            'print', 'preview', 'searchreplace', 'drafts', 'help'
+            'inserttable'
+            
         ]]
+        ,initialFrameHeight:510
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
         //    'anchor':'', 'undo':''
@@ -55,7 +147,7 @@
 
         //语言配置项,默认是zh-cn。有需要的话也可以使用如下这样的方式来自动多语言切换，当然，前提条件是lang文件夹下存在对应的语言文件：
         //lang值也可以通过自动获取 (navigator.language||navigator.browserLanguage ||navigator.userLanguage).toLowerCase()
-        //,lang:"zh-cn"
+        ,lang:"zh-cn"
         //,langPath:URL +"lang/"
 
         //主题配置项,默认是default。有需要的话也可以使用如下这样的方式来自动多主题切换，当然，前提条件是themes文件夹下存在对应的主题文件：
