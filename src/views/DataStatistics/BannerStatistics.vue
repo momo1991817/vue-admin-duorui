@@ -83,7 +83,7 @@ export default {
           address: '上海市普陀区金沙江路 1516 弄'
         }
       ],
-        pickerOptions2: {
+      pickerOptions2: {
         shortcuts: [
           {
             text: '最近一周',
