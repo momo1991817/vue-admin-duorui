@@ -1,5 +1,31 @@
 <template>
   <div class="app-container">
+    <div>
+      <el-form :inline="true"
+        :model="dataForm">
+        <el-form-item label="用户名称">
+          <el-input v-model="dataForm.key"
+            placeholder="标题" 
+            clearable></el-input>
+        </el-form-item>
+        <el-form-item label="日期">
+        <div class="block">
+          <el-date-picker v-model="dataForm.time"
+            type="datetimerange"
+            :picker-options="pickerOptions2"
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            align="right"
+            :default-time="['00:00:00', '23:59:59']">
+          </el-date-picker>
+        </div>
+      </el-form-item>
+        <el-form-item>
+        <el-button>查询</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
     <div class="dashboard-text">
       <el-table :data="tableData"
         border
@@ -29,8 +55,8 @@
         </el-table-column>
       </el-table>
     </div>
-    <div class="block">
-      <el-pagination layout="prev, pager, next"
+    <div class="block" style="float:right;margin-top:30px;">
+      <el-pagination layout="total,prev, pager, next"
         :total="1000">
       </el-pagination>
     </div>
@@ -42,6 +68,9 @@ export default {
   name: 'UserManage',
   data() {
     return {
+      dataForm: {
+        key: ''
+      },
       tableData: [
         {
           date: '2016-05-02',
@@ -63,7 +92,38 @@ export default {
           name: '王小虎',
           address: '上海市普陀区金沙江路 1516 弄'
         }
-      ]
+      ],
+        pickerOptions2: {
+        shortcuts: [
+          {
+            text: '最近一周',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+              picker.$emit('pick', [start, end])
+            }
+          },
+          {
+            text: '最近一个月',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+              picker.$emit('pick', [start, end])
+            }
+          },
+          {
+            text: '最近三个月',
+            onClick(picker) {
+              const end = new Date()
+              const start = new Date()
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+              picker.$emit('pick', [start, end])
+            }
+          }
+        ]
+      }
     }
   },
   computed: {},
