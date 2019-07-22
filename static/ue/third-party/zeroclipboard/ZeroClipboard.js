@@ -1251,7 +1251,6 @@
   } else {
     window.ZeroClipboard = ZeroClipboard;
   }
-
 })(function() {
   return this;
 }());

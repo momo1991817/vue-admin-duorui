@@ -1,6 +1,11 @@
 <template>
     <div class="app-container">
-      <UEditor @ready="editorReady" ref="ue" :value="defaultMSG" :ueditorConfig="config" style="width:100%;"/>
+      <UEditor :value="ueditor.value"
+               :config="ueditor.config"
+               ref="ue"/>
+      <input type="button"
+             value="显示编辑器内容（从控制台查看）"
+             @click="returnContent">
     </div>
 </template>
 
@@ -8,33 +13,27 @@
 import UEditor from "../../components/UEditor/UEditor";
 export default {
   name: 'ArticleStatistics',
+  components: {UEditor},
   data() {
     return {
-      defaultMSG: null,
-      form: {
+      dat: {
         content: ''
       },
-      config: {
-        initialFrameHeight: 500
+
+      ueditor: {
+        value: '编辑器默认文字',
+
+        config: {}
       }
-    };
+    }
   },
-  created() {
-    this.getInfo();
-  },
-  components: {UEditor},
+
   methods: {
-    getInfo() {
-      this.defaultMSG = this.form.content;
-    },
+    returnContent() {
+      this.dat.content = this.$refs.ue.getUEContent()
 
-    editorReady(instance) {
-      instance.setContent(this.form.content);
-      instance.addListener('contentChange', () => {
-        this.form.content = instance.getContent();
-      });
-    },
-
+      console.log(this.dat.content)
+    }
   }
 }
 </script>
