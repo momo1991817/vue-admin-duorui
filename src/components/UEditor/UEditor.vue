@@ -1,10 +1,8 @@
 <template>
 
   <div>
-
     <script id="editor"
             type="text/plain"></script>
-
   </div>
 
 </template>
@@ -12,13 +10,11 @@
 <script>
   export default {
     name: 'UEditor',
-
-    data() {
+    data () {
       return {
         editor: null
       }
     },
-
     props: {
       value: '',
 
