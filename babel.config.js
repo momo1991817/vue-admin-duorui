@@ -1,5 +1,10 @@
 module.exports = {
   presets: [
-    '@vue/app'
-  ]
+    '@vue/app',
+  ],
+  ignore: [
+    "./src/assets/libs/*.js"
+  ],
+  plugins: ["transform-remove-strict-mode"]
 }
+
