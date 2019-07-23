@@ -36,12 +36,6 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-
-  {
-    path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
-  },
   {
     path: '/',
     component: Layout,
@@ -65,7 +59,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '用户管理',
-      icon: 'dashboard'
+      icon: 'user'
     },
     children: [{
       path: 'UserManage',
@@ -81,7 +75,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '数据统计',
-      icon: 'dashboard'
+      icon: 'data'
     },
     children: [{
       path: 'ArticleStatistics',
@@ -122,7 +116,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '广告管理',
-      icon: 'dashboard'
+      icon: 'ad'
     },
     children: [{
       path: 'AdvertisePosition',
@@ -153,7 +147,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '轮播图管理',
-      icon: 'dashboard'
+      icon: 'banner'
     },
     children: [{
       path: 'BannerShow',
@@ -174,7 +168,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '商品管理',
-      icon: 'dashboard'
+      icon: 'goods'
     },
     children: [{
       path: 'CommodityShow',
@@ -195,7 +189,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '视频管理',
-      icon: 'dashboard'
+      icon: 'video'
     },
     children: [{
       path: 'VideoShow',
@@ -216,7 +210,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '文章管理',
-      icon: 'dashboard'
+      icon: 'article'
     },
     children: [{
       path: 'ArticleSort',
@@ -237,7 +231,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '栏目管理',
-      icon: 'dashboard'
+      icon: 'column'
     },
     children: [{
       path: 'ColumnsList',
@@ -253,7 +247,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '管理员管理',
-      icon: 'dashboard'
+      icon: 'admin'
     },
     children: [{
       path: 'RoleManagement',
@@ -279,7 +273,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '系统管理',
-      icon: 'dashboard'
+      icon: 'system'
     },
     children: [{
       path: 'SystemLog',
@@ -295,7 +289,7 @@ export const constantRoutes = [
     alwaysShow: true,
     meta: {
       title: '作者管理',
-      icon: 'dashboard'
+      icon: 'author'
     },
     children: [{
       path: 'AuthorList',
