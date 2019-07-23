@@ -34,16 +34,16 @@
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <el-dropdown-item>
-            文章
+            <span @click="showAddArticle"><svg-icon icon-class="article-2" /> 文章</span>
           </el-dropdown-item>
           <el-dropdown-item>
-            视频
+            <svg-icon icon-class="video-2" /> 视频
           </el-dropdown-item>
           <el-dropdown-item>
-            商品
+            <svg-icon icon-class="goods-2" /> 商品
           </el-dropdown-item>
           <el-dropdown-item>
-            管理员
+            <svg-icon icon-class="admin-2" /> 管理员
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -74,6 +74,9 @@ export default {
     async logout() {
       // await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    showAddArticle() {
+      this.$router.push('/AddArticle/AddArticle')
     }
   }
 }

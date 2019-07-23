@@ -58,6 +58,7 @@ div.edui-box {
 /* control layout */
 .edui-default .edui-button-body, .edui-splitbutton-body, .edui-menubutton-body, .edui-combox-body {
     position: relative;
+  line-height: normal;
 }
 
 .edui-default .edui-popup {

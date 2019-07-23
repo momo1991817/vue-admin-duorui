@@ -31,7 +31,7 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: URL + "php/controller.php",
+        , serverUrl: '',
 /* 上传图片配置项 */
 "imageActionName": "uploadimage", /* ִ���ϴ�ͼƬ��action���� */
 "imageFieldName": "file", /* �ύ��ͼƬ������ */
@@ -42,7 +42,7 @@
 "imageInsertAlign": "none", /* �����ͼƬ������ʽ */
 "imageUrlPrefix": "", /* ͼƬ����·��ǰ׺ */
 "imagePathFormat": "../../leguan_ad/lg_file/files/{yyyy}{mm}{dd}/{time}{rand:6}", /* �ϴ�����·��,�����Զ��屣��·�����ļ�����ʽ */
-                           
+
 
 /* 涂鸦图片上传配置项 */
 "scrawlActionName": "uploadscrawl", /* ִ���ϴ�Ϳѻ��action���� */
@@ -110,7 +110,7 @@
     ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid",
     ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
     ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"
-] 
+]
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的重新定义
         // , toolbars: [[
@@ -137,7 +137,7 @@
             'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
             'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
             'inserttable'
-            
+
         ]]
         ,initialFrameHeight:510
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准

@@ -1,8 +1,7 @@
 <template>
 
   <div>
-    <script id="editor"
-            type="text/plain"></script>
+    <script :id="randomId" type="text/plain"></script>
   </div>
 
 </template>
@@ -12,19 +11,22 @@
     name: 'UEditor',
     data () {
       return {
-        editor: null
+        //每个编辑器生成不同的id,以防止冲突
+        randomId: 'editor_' + (Math.random() * 100000000000000000),
       }
     },
     props: {
       value: '',
 
-      config: {}
+      config: {
+        serverUrl: 'http://35.201.165.105:8000/controller.php'
+      }
     },
 
     mounted() {
       const _this = this
 
-      this.editor = window.UE.getEditor('editor', this.config)
+      this.editor = window.UE.getEditor(this.randomId, this.config)
 
       this.editor.addListener('ready', function() {
         _this.editor.setContent(_this.value)

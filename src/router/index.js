@@ -298,6 +298,18 @@ export const constantRoutes = [
       meta: { title: '作者列表' }
     }]
   },
+  {
+    path: '/AddArticle',
+    component: Layout,
+    redirect: '/AddArticle/AddArticle',
+    hidden: true,
+    children: [{
+      path: 'AddArticle',
+      name: 'AddArticle',
+      component: () => import('@/views/AddArticle/AddArticle'),
+      meta: { title: '新增文章' }
+    }]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
