@@ -310,6 +310,18 @@ export const constantRoutes = [
       meta: { title: '新增文章' }
     }]
   },
+  {
+    path: '/AddVideo',
+    component: Layout,
+    redirect: '/AddVideo/AddVideo',
+    hidden: true,
+    children: [{
+      path: 'AddVideo',
+      name: 'AddVideo',
+      component: () => import('@/views/AddVideo/AddVideo'),
+      meta: { title: '新增视频' }
+    }]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

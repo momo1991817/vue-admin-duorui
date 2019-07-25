@@ -37,7 +37,7 @@
             <span @click="showAddArticle"><svg-icon icon-class="article-2" /> 文章</span>
           </el-dropdown-item>
           <el-dropdown-item>
-            <svg-icon icon-class="video-2" /> 视频
+            <span @click="showAddVideo"><svg-icon icon-class="video-2" /> 视频</span>
           </el-dropdown-item>
           <el-dropdown-item>
             <svg-icon icon-class="goods-2" /> 商品
@@ -77,6 +77,9 @@ export default {
     },
     showAddArticle() {
       this.$router.push('/AddArticle/AddArticle')
+    },
+    showAddVideo() {
+      this.$router.push('/AddVideo/AddVideo')
     }
   }
 }

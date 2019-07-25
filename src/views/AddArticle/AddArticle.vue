@@ -1,11 +1,11 @@
 <template>
     <div class="app-container">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="文章标题" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+      <el-form :model="addArticleForm" :rules="rules" ref="addArticleForm" label-width="100px" class="addArticleForm">
+        <el-form-item label="文章标题" prop="title">
+          <el-input v-model="addArticleForm.title"></el-input>
         </el-form-item>
-        <el-form-item label="文章栏目" prop="resource">
-          <el-radio-group v-model="ruleForm.resource">
+        <el-form-item label="文章栏目" prop="column">
+          <el-radio-group v-model="addArticleForm.column">
             <el-radio label="推荐"></el-radio>
             <el-radio label="健身"></el-radio>
             <el-radio label="情感"></el-radio>
@@ -14,13 +14,13 @@
             <el-radio label="健康"></el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="发布状态" prop="type">
-          <el-checkbox-group v-model="ruleForm.type">
-            <el-checkbox label="下架" name="type"></el-checkbox>
+        <el-form-item label="发布状态" prop="status">
+          <el-checkbox-group v-model="addArticleForm.status">
+            <el-checkbox label="下架" name="status"></el-checkbox>
           </el-checkbox-group>
         </el-form-item>
-        <el-form-item label="封面样式" prop="region">
-          <el-select v-model="ruleForm.region">
+        <el-form-item label="封面样式" prop="images">
+          <el-select v-model="addArticleForm.images">
             <el-option label="大图模式" value="0"></el-option>
             <el-option label="三图模式" value="1"></el-option>
             <el-option label="无图模式" value="2"></el-option>
@@ -35,12 +35,12 @@
             action="https://jsonplaceholder.typicode.com/posts/"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
-            :file-list="fileList"
+            :file-list="addArticleForm.fileList"
             list-type="picture"
             multiple>
             <i class="el-icon-upload"></i>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+<!--            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>-->
           </el-upload>
         </el-form-item>
         <el-form-item label="文章内容" prop="content" style="">
@@ -49,8 +49,8 @@
                    ref="ue"/>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-<!--          <el-button @click="resetForm('ruleForm')">重置</el-button>-->
+          <el-button type="primary" @click="submitForm('addArticleForm')">提交</el-button>
+<!--          <el-button @click="resetForm('addArticleForm')">重置</el-button>-->
         </el-form-item>
       </el-form>
     </div>
@@ -63,19 +63,15 @@
       components: {UEditor},
       data() {
         return {
-          ruleForm: {
-            name: '',
-            region: '大图模式',
-            date1: '',
-            date2: '',
-            delivery: false,
-            type: [],
-            resource: '',
-            desc: '',
+          addArticleForm: {
+            title: '',
+            images: '大图模式',
+            status: [],
+            column: '',
             articleImg: '',
             content: '',
+            fileList:[]
           },
-          fileList:[],
           dat: {
             content: ''
           },
@@ -87,30 +83,21 @@
             }
           },
           rules: {
-            name: [
-              { required: true, message: '请输入活动名称', trigger: 'blur' },
-              { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+            title: [
+              { required: true, message: '请输入活动名称', trigger: 'blur' }
+              // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
             ],
-            region: [
+            column: [
               { required: true, trigger: 'change' }
             ],
-            date1: [
-              { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+            images: [
+              { required: true, trigger: 'change' }
             ],
-            date2: [
-              { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-            ],
-            type: [
-              { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-            ],
-            resource: [
-              { required: true, message: '请选择活动资源', trigger: 'change' }
-            ],
-            desc: [
-              { required: true, message: '请填写活动形式', trigger: 'blur' }
+            status: [
+              { required: true, trigger: 'change' }
             ],
             articleImg: [
-              { required: true }
+              // { required: true }
             ],
             content: [
               { required:true }
@@ -129,7 +116,9 @@
           this.dat.content = this.$refs.ue.getUEContent()
         },
         submitForm(formName) {
+          this.addArticleForm.content = this.$refs.ue.getUEContent();
           this.$refs[formName].validate((valid) => {
+            console.log(this.addArticleForm)
             if (valid) {
               alert('submit!');
             } else {
