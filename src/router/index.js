@@ -6,6 +6,12 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 
+/* Router Modules */
+import componentsRouter from './modules/components'
+import chartsRouter from './modules/charts'
+import tableRouter from './modules/table'
+import nestedRouter from './modules/nested'
+
 /**
  * Note: sub-menu only appear when route children.length >= 1
  * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
@@ -20,6 +26,8 @@ import Layout from '@/layout'
     roles: ['admin','editor']    control the page roles (you can set multiple roles)
     title: 'title'               the name show in sidebar and breadcrumb (recommend set)
     icon: 'svg-name'             the icon show in the sidebar
+    noCache: true                if set true, the page will no be cached(default is false)
+    affix: true                  if set true, the tag will affix in the tags-view
     breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
     activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
   }
@@ -32,25 +40,48 @@ import Layout from '@/layout'
  */
 export const constantRoutes = [
   {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path*',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
+    hidden: true
+  },
+  {
+    path: '/auth-redirect',
+    component: () => import('@/views/login/auth-redirect'),
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/error-page/404'),
+    hidden: true
+  },
+  {
+    path: '/401',
+    component: () => import('@/views/error-page/401'),
     hidden: true
   },
   {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    alwaysShow: true,
-    meta: {
-      title: '我的桌面',
-      icon: 'dashboard'
-    },
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: '我的桌面' }
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: 'Dashboard',
+        meta: { title: '我的桌面', icon: 'dashboard', affix: true }
+      }
+    ]
   },
   {
     path: '/UserManage',
@@ -322,6 +353,82 @@ export const constantRoutes = [
       meta: { title: '新增视频' }
     }]
   },
+  {
+    path: '/profile',
+    component: Layout,
+    redirect: '/profile/index',
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/profile/index'),
+        name: 'Profile',
+        meta: { title: '个人信息', icon: 'user', noCache: true }
+      }
+    ]
+  }
+]
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
+  // {
+  //   path: '/AddArticle',
+  //   component: Layout,
+  //   redirect: '/AddArticle/AddArticle',
+  //   hidden: true,
+  //   children: [{
+  //     path: 'AddArticle',
+  //     name: 'AddArticle',
+  //     component: () => import('@/views/AddArticle/AddArticle'),
+  //     meta: { title: '新增文章' }
+  //   }]
+  // },
+  // {
+  //   path: '/AddVideo',
+  //   component: Layout,
+  //   redirect: '/AddVideo/AddVideo',
+  //   hidden: true,
+  //   children: [{
+  //     path: 'AddVideo',
+  //     name: 'AddVideo',
+  //     component: () => import('@/views/AddVideo/AddVideo'),
+  //     meta: { title: '新增视频' }
+  //   }]
+  // },
+
+  /** when your routing map is too long, you can split it into small modules **/
+  // componentsRouter,
+  // chartsRouter,
+  // nestedRouter,
+  // tableRouter,
+  // {
+  //   path: '/AddArticle',
+  //   component: Layout,
+  //   redirect: '/AddArticle/AddArticle',
+  //   hidden: true,
+  //   children: [{
+  //     path: 'AddArticle',
+  //     name: 'AddArticle',
+  //     component: () => import('@/views/AddArticle/AddArticle'),
+  //     meta: { title: '新增文章' }
+  //   }]
+  // },
+  // {
+  //   path: '/AddVideo',
+  //   component: Layout,
+  //   redirect: '/AddVideo/AddVideo',
+  //   hidden: true,
+  //   children: [{
+  //     path: 'AddVideo',
+  //     name: 'AddVideo',
+  //     component: () => import('@/views/AddVideo/AddVideo'),
+  //     meta: { title: '新增视频' }
+  //   }]
+  // },
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

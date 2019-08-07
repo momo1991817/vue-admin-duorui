@@ -24,8 +24,8 @@ export default {
   },
   data() {
     return {
-      title: '多锐后台管理系统',
-      logo: 'http://cms.hnwlcm.com:8080/favicon.ico'
+      title: 'Vue Element Admin',
+      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
     }
   }
 }

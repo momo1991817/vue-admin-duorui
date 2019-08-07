@@ -19,7 +19,11 @@ export default {
     }
   },
   watch: {
-    $route() {
+    $route(route) {
+      // if you go to the redirect page, do not update the breadcrumbs
+      if (route.path.startsWith('/redirect/')) {
+        return
+      }
       this.getBreadcrumb()
     }
   },
@@ -33,8 +37,7 @@ export default {
       const first = matched[0]
 
       if (!this.isDashboard(first)) {
-        matched = [{ path: '/', meta: { title: '首页' }}].concat(matched)
-        // matched = [].concat(matched)
+        matched = [{ path: '/dashboard', meta: { title: '我的桌面' }}].concat(matched)
       }
 
       this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
@@ -44,7 +47,7 @@ export default {
       if (!name) {
         return false
       }
-      return name.trim().toLocaleLowerCase() === '我的桌面'.toLocaleLowerCase()
+      return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
     },
     pathCompile(path) {
       // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
