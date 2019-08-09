@@ -1,49 +1,77 @@
 <template>
   <div class="app-container">
-     <el-form>
-        <el-form-item>
-        <el-button>新增</el-button>
-        </el-form-item>
-     </el-form>
-    <div class="dashboard-text">
+    <el-button type="primary" @click="handleEdit">添加图片广告</el-button>
+    <div class="table-box">
       <el-table :data="tableData"
         border
         style="width: 100%">
-        <el-table-column prop="date"
-          label="ID">
-        </el-table-column>
-         <el-table-column prop="date"
-          label="名称">
-        </el-table-column>
-        <el-table-column prop="date"
-          label="广告位置">
-        </el-table-column>
-        <el-table-column prop="date"
-          label="点击量">
-        </el-table-column>
-        <el-table-column prop="date"
-          label="图片">
-        </el-table-column>
-        <el-table-column label="图片链接">
+        <el-table-column prop="ID" label="ID"></el-table-column>
+         <el-table-column prop="name" label="名称"></el-table-column>
+        <el-table-column prop="position" label="广告位置"></el-table-column>
+        <el-table-column prop="count" label="点击量"></el-table-column>
+        <el-table-column prop="picture" label="图片" align="center">
           <template slot-scope="scope">
+            <img :src="scope.row.picture">
           </template>
         </el-table-column>
-         <el-table-column label="更新时间"
-          prop="date">
-        </el-table-column>
+        <el-table-column prop="pictureLink" label="图片链接"></el-table-column>
+        <el-table-column prop="creatTime" label="更新时间"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-        <el-button  type="text" size="small">删除</el-button>
-        <el-button type="text" size="small">编辑</el-button>
-      </template>
+            <el-button  type="text" size="small" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            <el-button type="text" size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
     <div class="block" style="float:right;margin-top:30px;">
-      <el-pagination layout="total,prev, pager, next"
+      <el-pagination
+        background
+        layout="total,prev, pager, next"
+        @current-change="handleCurrentChange"
         :total="1000">
       </el-pagination>
     </div>
+    <!--    编辑广告弹框-->
+    <el-dialog
+      title="广告图片编辑"
+      :visible.sync="dialogFormVisible"
+      @close = "cancelForm('form')"
+    >
+      <el-form :model="form" :rules="rules" ref="form">
+        <el-form-item label="名称" :label-width="formLabelWidth" prop="name">
+          <el-input v-model="form.name" autocomplete="off" placeholder="请输入广告名称"></el-input>
+        </el-form-item>
+        <el-form-item label="广告图片位置" :label-width="formLabelWidth" prop="position">
+          <el-select v-model="form.position">
+            <el-option label="底部栏" value="0">
+            </el-option>
+            <el-option label="推荐" value="1">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="图片链接" :label-width="formLabelWidth" prop="imageLink">
+          <el-input v-model="form.imageLink" autocomplete="off" placeholder="http://www.baidu.com"></el-input>
+        </el-form-item>
+        <el-form-item label="上传图片" :label-width="formLabelWidth" prop="fileList">
+          <el-upload
+            class="upload-demo"
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-change="handleUpload"
+            :limit="form.limit"
+            :on-remove="handleRemove"
+            :file-list="form.fileList"
+            list-type="picture">
+            <el-button size="small" type="primary">点击上传</el-button>
+<!--            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelForm('form')">取 消</el-button>
+        <el-button type="primary" @click="submitForm('form')">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -52,84 +80,106 @@ export default {
   name: 'UserManage',
   data() {
     return {
-      dataForm: {
-        key: ''
+      dialogFormVisible: false,
+      form: {
+        limit: 1,
+        name:'',
+        imageLink: '',
+        fileList: [],
+        position: '底部栏',
+      },
+      formLabelWidth: '120px',
+      rules:{
+        position:[
+          {required: true, trigger: 'change'}
+        ],
+        name:[
+          {required: true, message: '请输入广告名称'}
+        ],
+        imageLink:[
+          {required: true, message: '请输入图片链接'}
+        ],
+        fileList:[
+          {required: true, message: '请上传图片',trigger: 'change'}
+        ]
       },
       tableData: [
         {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          ID: '1',
+          name: '一部成年人短片刷爆全网：我可能慢慢的毁了我自己！',
+          position: '底部栏',
+          count: '0',
+          picture: 'https://articleimage.oss-cn-beijing.aliyuncs.com/image/advertisement/3eae18b5-bd37-497e-a1f6-19854c86df37.jpg',
+          pictureLink: 'https://articleimage.oss-cn-beijing.aliyuncs.com/image/advertisement/3eae18b5-bd37-497e-a1f6-19854c86df37.jpg',
+          creatTime: '2019-06-21 04:15',
         },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }
-      ],
-        pickerOptions2: {
-        shortcuts: [
-          {
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
-            }
-          },
-          {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-              picker.$emit('pick', [start, end])
-            }
-          }
-        ]
-      }
+      ]
     }
   },
   computed: {},
   methods: {
     handleEdit(index, row) {
-      console.log(index, row)
+      this.dialogFormVisible = true;
+      if(row !== undefined){
+        this.form.position = row.position;
+      }else{
+        this.form.position = ''
+      }
+      console.log(row)
     },
     handleDelete(index, row) {
-      console.log(index, row)
+      console.log(index, row);
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+    submitForm(formName){
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          console.log(this.form)
+          this.dialogFormVisible = false;
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    cancelForm(formName){
+      this.$refs[formName].clearValidate();
+      this.$refs[formName].resetFields();
+      this.dialogFormVisible = false;
+    },
+    handleUpload(file,fileList){
+      this.form.fileList = fileList;
+    },
+    handleRemove(file, fileList) {
+      this.form.fileList = fileList;
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
+  .table-box{
+    margin: 22px 0 0 0;
+    img{
+      width: 80px;
+      height: 60px;
+    }
   }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
-}
 </style>
