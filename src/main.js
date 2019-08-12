@@ -25,6 +25,9 @@ import axios from 'axios'
 Vue.prototype.$http = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.baseURL = baseURL
+
+//全局上传文件地址
+Vue.prototype.$uploadHttp = 'https://jsonplaceholder.typicode.com/posts/';
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

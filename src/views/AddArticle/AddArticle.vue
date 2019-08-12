@@ -32,7 +32,7 @@
           <el-upload
             class="upload-demo"
             drag
-            action="https://jsonplaceholder.typicode.com/posts/"
+            action="$uploadHttp"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
             :file-list="addArticleForm.fileList"
