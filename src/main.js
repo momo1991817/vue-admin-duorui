@@ -20,11 +20,10 @@ import './utils/error-log' // error log
 import * as filters from './filters' // global filters
 
 // 引入axios
-const baseURL = 'http://192.168.201.184:8091/api/'
 import axios from 'axios'
 Vue.prototype.$http = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-axios.defaults.baseURL = baseURL
+axios.defaults.baseURL = 'http://192.168.201.184:8091/api/'
 
 //全局上传文件地址
 Vue.prototype.$uploadHttp = 'https://jsonplaceholder.typicode.com/posts/';
