@@ -113,12 +113,14 @@ export const constantRoutes = [
       name: 'ArticleStatistics',
       component: () => import('@/views/DataStatistics/ArticleStatistics'),
       meta: { title: '文章数据统计' }
-    }, {
-      path: 'VideoStatistics',
-      name: 'VideoStatistics',
-      component: () => import('@/views/DataStatistics/VideoStatistics'),
-      meta: { title: '视频数据统计' }
-    }, {
+    },
+    //   {
+    //   path: 'VideoStatistics',
+    //   name: 'VideoStatistics',
+    //   component: () => import('@/views/DataStatistics/VideoStatistics'),
+    //   meta: { title: '视频数据统计' }
+    // },
+     {
       path: 'ColumnsStatistics',
       name: 'ColumnsStatistics',
       component: () => import('@/views/DataStatistics/ColumnsStatistics'),
@@ -131,14 +133,51 @@ export const constantRoutes = [
     }, {
       path: 'DislikeStatistics',
       name: 'DislikeStatistics',
-      component: () => import('@/views/DataStatistics/DislikeStatistics'),
+      component: () => import('@/views/DataStatistics/NoInterestStatistics'),
       meta: { title: '不感兴趣数据统计' }
     }, {
       path: 'BannerStatistics',
       name: 'BannerStatistics',
       component: () => import('@/views/DataStatistics/BannerStatistics'),
       meta: { title: '轮播图数据统计' }
-    }]
+    }, {
+      path: 'UserKeepStatistics',
+      name: 'UserKeepStatistics',
+      component: () => import('@/views/DataStatistics/UserKeepStatistics'),
+      meta: { title: '用户留存统计' }
+    }, {
+      path: 'NewUserStatistics',
+      name: 'NewUserStatistics',
+      component: () => import('@/views/DataStatistics/NewUserStatistics'),
+      meta: { title: '用户新增统计' }
+    }, {
+      path: 'SlideStatistics',
+      name: 'SlideStatistics',
+      component: () => import('@/views/DataStatistics/SlideStatistics'),
+      meta: { title: '推荐页滑动统计' }
+    }, {
+      path: 'ContentShowStatistics',
+      name: 'ContentShowStatistics',
+      component: () => import('@/views/DataStatistics/ContentShowStatistics'),
+      meta: { title: '文章视频展示统计' }
+    }, {
+      path: 'ContentClickStatistics',
+      name: 'ContentClickStatistics',
+      component: () => import('@/views/DataStatistics/ContentClickStatistics'),
+      meta: { title: '详情推荐点击统计' }
+    }, {
+      path: 'UserCentreStatistics',
+      name: 'UserCentreStatistics',
+      component: () => import('@/views/DataStatistics/UserCentreStatistics'),
+      meta: { title: '个人中心统计' }
+    }, {
+      path: 'AuthorStatistics',
+      name: 'AuthorStatistics',
+      component: () => import('@/views/DataStatistics/AuthorStatistics'),
+      meta: { title: '作者数据统计' }
+    }
+
+    ]
   },
   {
     path: '/AdvertiseManagement',

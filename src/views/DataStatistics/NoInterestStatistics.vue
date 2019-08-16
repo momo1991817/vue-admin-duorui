@@ -5,12 +5,12 @@
         :model="dataForm">
         <el-form-item label="类型">
           <el-input v-model="dataForm.key"
-            placeholder="标题" 
+            placeholder="标题"
             clearable></el-input>
         </el-form-item>
          <el-form-item label="类型ID">
           <el-input v-model="dataForm.key"
-            placeholder="标题" 
+            placeholder="标题"
             clearable></el-input>
         </el-form-item>
         <el-form-item label="日期">
@@ -33,26 +33,48 @@
     </div>
     <div class="dashboard-text">
       <el-table :data="tableData"
-        border
-        style="width: 100%">
-        <el-table-column prop="date"
-          label="数据类型">
+                border
+                stripe
+                style="width: 100%">
+        <el-table-column
+          label="数据类型"
+          align="center"
+          prop="type"
+          :formatter="formatterType"
+        >
         </el-table-column>
-        <el-table-column label="ID">
-          <template slot-scope="scope">
-          </template>
+
+        <el-table-column
+          label="类型ID"
+          align="center"
+          prop="typeId">
         </el-table-column>
-        <el-table-column label="不感兴趣数量"
-          prop="date">
+
+        <el-table-column
+          label="不感兴趣数量"
+          align="center"
+          prop="number">
         </el-table-column>
-         <el-table-column label="日期"
+
+        <el-table-column
+          label="日期"
+          align="center"
           prop="date">
         </el-table-column>
       </el-table>
+
+
     </div>
-    <div class="block" style="float:right;margin-top:30px;">
-      <el-pagination layout="total,prev, pager, next"
-        :total="1000">
+    <!--分页-->
+    <div class="block" style="float:left;margin-top:30px;">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page=page
+        :page-sizes="[10, 20, 30, 50, 100]"
+        :page-size=pageSize
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=dataTotal>
       </el-pagination>
     </div>
   </div>
@@ -66,29 +88,11 @@ export default {
       dataForm: {
         key: ''
       },
-      tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }
-      ],
-        pickerOptions2: {
+      tableData: [],
+      page:1,
+      pageSize:10,
+      dataTotal:0,
+      pickerOptions2: {
         shortcuts: [
           {
             text: '最近一周',
@@ -123,24 +127,56 @@ export default {
   },
   computed: {},
   methods: {
+    getData(){
+      let _this = this;
+      this.$http.get('statistics/getNoInterest',{
+        params:{
+          page:_this.page,
+          pageSize:_this.pageSize
+        }
+      }).then(resp=>{
+        _this.dataTotal = resp.data.totalCount;
+        this.tableData = resp.data.data;
+      })
+    },
+    handleSizeChange(val) {
+      this.pageSize = val;
+      this.getData();
+    },
+    handleCurrentChange(val) {
+      this.page = val;
+      this.getData();
+    },
+    formatterType(row, column, cellValue){
+      if(row.type === 1){
+          return '文章';
+      }else if(row.type === 2){
+          return '视频';
+      }else {
+          return '未知';
+      }
+    },
+
     handleEdit(index, row) {
       console.log(index, row)
     },
     handleDelete(index, row) {
       console.log(index, row)
     }
+  },created() {
+    this.getData();
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
-  &-container {
-    margin: 30px;
+  .dashboard {
+    &-container {
+      margin: 30px;
+    }
+    &-text {
+      font-size: 30px;
+      line-height: 36px;
+    }
   }
-  &-text {
-    font-size: 30px;
-    line-height: 46px;
-  }
-}
 </style>

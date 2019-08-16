@@ -80,6 +80,9 @@
     "svgo": "1.2.0",
     "vue-template-compiler": "2.6.10"
   },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "engines": {
     "node": ">=8.9",
     "npm": ">= 3.0.0"

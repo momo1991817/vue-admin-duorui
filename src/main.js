@@ -20,7 +20,7 @@ import './utils/error-log' // error log
 import * as filters from './filters' // global filters
 
 // 引入axios
-const baseURL = 'http://120.79.132.229:8083/'
+const baseURL = 'http://192.168.201.184:8091/api/'
 import axios from 'axios'
 Vue.prototype.$http = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
