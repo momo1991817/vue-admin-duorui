@@ -413,61 +413,6 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-  // {
-  //   path: '/AddArticle',
-  //   component: Layout,
-  //   redirect: '/AddArticle/AddArticle',
-  //   hidden: true,
-  //   children: [{
-  //     path: 'AddArticle',
-  //     name: 'AddArticle',
-  //     component: () => import('@/views/AddArticle/AddArticle'),
-  //     meta: { title: '新增文章' }
-  //   }]
-  // },
-  // {
-  //   path: '/AddVideo',
-  //   component: Layout,
-  //   redirect: '/AddVideo/AddVideo',
-  //   hidden: true,
-  //   children: [{
-  //     path: 'AddVideo',
-  //     name: 'AddVideo',
-  //     component: () => import('@/views/AddVideo/AddVideo'),
-  //     meta: { title: '新增视频' }
-  //   }]
-  // },
-
-  /** when your routing map is too long, you can split it into small modules **/
-  // componentsRouter,
-  // chartsRouter,
-  // nestedRouter,
-  // tableRouter,
-  // {
-  //   path: '/AddArticle',
-  //   component: Layout,
-  //   redirect: '/AddArticle/AddArticle',
-  //   hidden: true,
-  //   children: [{
-  //     path: 'AddArticle',
-  //     name: 'AddArticle',
-  //     component: () => import('@/views/AddArticle/AddArticle'),
-  //     meta: { title: '新增文章' }
-  //   }]
-  // },
-  // {
-  //   path: '/AddVideo',
-  //   component: Layout,
-  //   redirect: '/AddVideo/AddVideo',
-  //   hidden: true,
-  //   children: [{
-  //     path: 'AddVideo',
-  //     name: 'AddVideo',
-  //     component: () => import('@/views/AddVideo/AddVideo'),
-  //     meta: { title: '新增视频' }
-  //   }]
-  // },
-
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

@@ -35,12 +35,12 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         //  修改登录接口返回的数据
-        response = {
-          code: 2000,
-          data: {
-            token: "admin-token"
-          }
-        }
+        // response = {
+        //   code: 2000,
+        //   data: {
+        //     token: "admin-token"
+        //   }
+        // }
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
@@ -56,7 +56,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         // 修改用户信息接口返回的数据
-        response = {"code":20000,"data":{"roles":["admin"],"introduction":"I am a super administrator","avatar":"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif","name":"Super Admin"}}
+        // response = {"code":20000,"data":{"roles":["admin"],"introduction":"I am a super administrator","avatar":"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif","name":"Super Admin"}}
         const { data } = response
 
         if (!data) {
