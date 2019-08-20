@@ -31,46 +31,9 @@
                 stripe
                 style="width: 100%">
         <el-table-column
-            label="文章ID"
+            label="昨日新增"
             align="center"
-            prop="typeId">
-        </el-table-column>
-
-        <el-table-column
-            label="UV"
-            align="center"
-            prop="uv">
-        </el-table-column>
-
-        <el-table-column
-            label="PV"
-            align="center"
-            prop="pv">
-        </el-table-column>
-
-        <el-table-column
-            label="文章触底数量"
-            align="center"
-            prop="hitBottom">
-        </el-table-column>
-
-        <el-table-column
-            label="收藏数量"
-            align="center"
-            prop="follow"
-        >
-        </el-table-column>
-
-        <el-table-column
-            label="点赞数量"
-            align="center"
-            prop="like">
-        </el-table-column>
-
-        <el-table-column
-            label="分享数量"
-            align="center"
-            prop="share">
+            prop="newUv">
         </el-table-column>
 
         <el-table-column
@@ -98,7 +61,7 @@
 
 <script>
 export default {
-  name: 'ArticleStatistics',
+  name: 'NewUserStatistics',
   components: {},
   data() {
     return {
@@ -109,9 +72,6 @@ export default {
       page:1,
       pageSize:10,
       dataTotal:0,
-
-
-
       pickerOptions2: {
       shortcuts: [
         {
@@ -148,7 +108,7 @@ export default {
   methods: {
     getData(){
       let _this = this;
-      this.$http.get('statistics/getArticleData',{
+      this.$http.get('statistics/getNewUser',{
         params:{
           page:_this.page,
           pageSize:_this.pageSize

@@ -31,46 +31,22 @@
                 stripe
                 style="width: 100%">
         <el-table-column
-            label="文章ID"
-            align="center"
-            prop="typeId">
-        </el-table-column>
-
-        <el-table-column
-            label="UV"
+            label="昨日访问"
             align="center"
             prop="uv">
         </el-table-column>
 
         <el-table-column
-            label="PV"
+            label="留存用户"
             align="center"
-            prop="pv">
+            prop="newUv">
         </el-table-column>
 
-        <el-table-column
-            label="文章触底数量"
-            align="center"
-            prop="hitBottom">
-        </el-table-column>
 
         <el-table-column
-            label="收藏数量"
+            label="留存率"
             align="center"
-            prop="follow"
-        >
-        </el-table-column>
-
-        <el-table-column
-            label="点赞数量"
-            align="center"
-            prop="like">
-        </el-table-column>
-
-        <el-table-column
-            label="分享数量"
-            align="center"
-            prop="share">
+            prop="keepRate">
         </el-table-column>
 
         <el-table-column
@@ -148,7 +124,7 @@ export default {
   methods: {
     getData(){
       let _this = this;
-      this.$http.get('statistics/getArticleData',{
+      this.$http.get('statistics/getUserKeep',{
         params:{
           page:_this.page,
           pageSize:_this.pageSize

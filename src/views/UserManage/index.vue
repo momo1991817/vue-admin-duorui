@@ -5,7 +5,7 @@
         :model="dataForm">
         <el-form-item label="用户名称">
           <el-input v-model="dataForm.key"
-            placeholder="标题" 
+            placeholder="标题"
             clearable></el-input>
         </el-form-item>
         <el-form-item label="日期">
@@ -28,36 +28,78 @@
     </div>
     <div class="dashboard-text">
       <el-table :data="tableData"
-        border
-        style="width: 100%">
-        <el-table-column prop="date"
-          label="openId"
-          width="180">
+                border
+                stripe
+                style="width: 100%">
+        <el-table-column
+          label="用户ID"
+          align="center"
+          prop="id">
         </el-table-column>
-        <el-table-column label="Token"
-          prop="date">
+
+        <el-table-column
+          label="用户名称"
+          align="center"
+          prop="nickName">
         </el-table-column>
-        <el-table-column label="用户头像"
-          prop="date">
+
+        <el-table-column
+          label="性别"
+          align="center"
+          prop="sex">
         </el-table-column>
-        <el-table-column label="性别">
+
+
+        <el-table-column
+          label="头像"
+          align="center"
+          width="180"
+          prop="headImgUrl">
           <template slot-scope="scope">
+            <el-popover
+              placement="right"
+              title=""
+              trigger="hover">
+              <img style="width: 200px;height: 200px" :src="scope.row.headImgUrl"/>
+              <img slot="reference" :src="scope.row.headImgUrl" :alt="scope.row.headImgUrl"
+                   style="max-height: 50px;max-width: 130px">
+            </el-popover>
           </template>
         </el-table-column>
-        <el-table-column label="用户昵称"
-          prop="date">
+
+
+        <el-table-column
+          :show-overflow-tooltip="true"
+          label="Token"
+          align="center"
+          prop="token">
         </el-table-column>
-        <el-table-column label="创建时间"
-          prop="date">
+
+        <el-table-column
+          label="创建时间"
+          align="center"
+          prop="createTime">
         </el-table-column>
-        <el-table-column label="更新时间"
-          prop="date">
+
+        <el-table-column
+          label="修改时间"
+          align="center"
+          prop="updateTime">
         </el-table-column>
       </el-table>
+
     </div>
-    <div class="block" style="float:right;margin-top:30px;">
-      <el-pagination layout="total,prev, pager, next"
-        :total="1000">
+
+    <!--分页-->
+    <div class="block" style="float:left;margin-top:30px;">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page=page
+        :page-sizes="[10, 20, 30, 50, 100]"
+        :page-size=pageSize
+        layout="total, sizes, prev, pager, next, jumper"
+        :total=dataTotal>
       </el-pagination>
     </div>
   </div>
@@ -71,29 +113,12 @@ export default {
       dataForm: {
         key: ''
       },
-      tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        },
-        {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }
-      ],
-        pickerOptions2: {
+      tableData: [],
+      page:1,
+      pageSize:10,
+      dataTotal:0,
+
+      pickerOptions2: {
         shortcuts: [
           {
             text: '最近一周',
@@ -128,12 +153,43 @@ export default {
   },
   computed: {},
   methods: {
+    getData(){
+      let _this = this;
+      this.$http.get('user',{
+        params:{
+          page:_this.page,
+          pageSize:_this.pageSize
+        }
+      }).then(resp=>{
+        _this.dataTotal = resp.data.totalCount;
+        this.tableData = resp.data.data;
+      })
+    },
+    handleSizeChange(val) {
+      this.pageSize = val;
+      this.getData();
+    },
+    handleCurrentChange(val) {
+      this.page = val;
+      this.getData();
+    },
+    formatterType(row, column, cellValue){
+      if(row.typeId === 1){
+        return '收藏';
+      }else if(row.typeId === 2){
+        return '关注';
+      }else {
+        return '未知';
+      }
+    },
     handleEdit(index, row) {
       console.log(index, row)
     },
     handleDelete(index, row) {
       console.log(index, row)
     }
+  },created() {
+    this.getData();
   }
 }
 </script>

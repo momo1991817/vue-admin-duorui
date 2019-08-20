@@ -31,9 +31,11 @@
                 stripe
                 style="width: 100%">
         <el-table-column
-            label="文章ID"
+            label="类型"
             align="center"
-            prop="typeId">
+            prop="typeId"
+            :formatter="formatterType"
+        >
         </el-table-column>
 
         <el-table-column
@@ -48,30 +50,6 @@
             prop="pv">
         </el-table-column>
 
-        <el-table-column
-            label="文章触底数量"
-            align="center"
-            prop="hitBottom">
-        </el-table-column>
-
-        <el-table-column
-            label="收藏数量"
-            align="center"
-            prop="follow"
-        >
-        </el-table-column>
-
-        <el-table-column
-            label="点赞数量"
-            align="center"
-            prop="like">
-        </el-table-column>
-
-        <el-table-column
-            label="分享数量"
-            align="center"
-            prop="share">
-        </el-table-column>
 
         <el-table-column
             label="日期"
@@ -148,7 +126,7 @@ export default {
   methods: {
     getData(){
       let _this = this;
-      this.$http.get('statistics/getArticleData',{
+      this.$http.get('statistics/getUserCentre',{
         params:{
           page:_this.page,
           pageSize:_this.pageSize
@@ -166,6 +144,15 @@ export default {
       this.page = val;
       this.getData();
     },
+    formatterType(row, column, cellValue){
+      if(row.typeId === 1){
+        return '收藏';
+      }else if(row.typeId === 2){
+        return '关注';
+      }else {
+        return '未知';
+      }
+    }
   },created() {
     this.getData();
   }

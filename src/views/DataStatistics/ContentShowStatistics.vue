@@ -31,46 +31,23 @@
                 stripe
                 style="width: 100%">
         <el-table-column
-            label="文章ID"
+            label="类型"
+            align="center"
+            prop="type"
+            :formatter="formatterType"
+        >
+        </el-table-column>
+
+        <el-table-column
+            label="类型ID"
             align="center"
             prop="typeId">
         </el-table-column>
 
         <el-table-column
-            label="UV"
+            label="展示数量"
             align="center"
-            prop="uv">
-        </el-table-column>
-
-        <el-table-column
-            label="PV"
-            align="center"
-            prop="pv">
-        </el-table-column>
-
-        <el-table-column
-            label="文章触底数量"
-            align="center"
-            prop="hitBottom">
-        </el-table-column>
-
-        <el-table-column
-            label="收藏数量"
-            align="center"
-            prop="follow"
-        >
-        </el-table-column>
-
-        <el-table-column
-            label="点赞数量"
-            align="center"
-            prop="like">
-        </el-table-column>
-
-        <el-table-column
-            label="分享数量"
-            align="center"
-            prop="share">
+            prop="showNumber">
         </el-table-column>
 
         <el-table-column
@@ -148,7 +125,7 @@ export default {
   methods: {
     getData(){
       let _this = this;
-      this.$http.get('statistics/getArticleData',{
+      this.$http.get('statistics/getContentShow',{
         params:{
           page:_this.page,
           pageSize:_this.pageSize
@@ -166,6 +143,15 @@ export default {
       this.page = val;
       this.getData();
     },
+    formatterType(row, column, cellValue) {
+      if (row.type === 1) {
+        return '文章';
+      } else if (row.type === 2) {
+        return '视频';
+      } else {
+        return '未知';
+      }
+    }
   },created() {
     this.getData();
   }
